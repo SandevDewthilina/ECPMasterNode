@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "IAM Roles";
+}
+
+@model IEnumerable<IdentityRole>;
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/IAMrole/iam-role.css"/>
+}
+
+<div class="container">
+    <section>
+        <div class="page-main-header">@ViewData["Title"]</div>
+        <div class="page-sub-header">
+            Create a agent node with suitable configurations
+        </div>
+    </section>
+    <section class="mt-2 main-page-content">
+        <div class="col-sm-12">
+            <div class="d-flex justify-content-end">
+                <a class="my-btn" asp-action="CreateRole" asp-controller="Administration">Create role</a>
+            </div>
+            <div class="my-card mt-3">
+                <div class="my-card-header">User roles</div>
+                <div class="my-card-body">
+                    <div class="d-flex flex-wrap">
+                        @foreach (IdentityRole role in Model)
+                        {
+                            <!-- role item -->
+                            <div class="role-container">
+                                <div
+                                    class="role-container-left d-flex flex-column justify-content-between mr-3">
+                                    <div>
+                                        <div style="font-size: 14px; font-weight: 900;">Role ID: @role.Id</div>
+                                        <div style="font-size: 12px; font-weight: 500; color: #232F3E;">Role Name: @role.Name</div>
+                                    </div>
+                                    <div class="mt-3" style="font-size: 10px; color: #232F3E; font-style: italic;">Click here to view assigned users</div>
+                                </div>
+                                <div
+                                    class="role-container-right d-flex justify-content-end align-items-center">
+                                    <a class="my-btn mr-2" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id">edit</a>
+                                    <a class="my-btn-danger" asp-action="DeleteRole" asp-controller="Administration" asp-route-id="@role.Id" 
+                                       onclick="return confirm('Are you sure to delete this user : @role.Name')">delete</a>
+                                </div>
+                            </div>
+                            <!-- role item end -->
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

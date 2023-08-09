@@ -1,0 +1,42 @@
+﻿@model List<ECPMaster.ViewModels.UserRoleViewModel>
+
+@{
+    ViewData["Title"] = "Edit Users in Role";
+}
+<div class="container">
+    <section>
+        <div class="page-main-header">@ViewData["Title"]</div>
+        <div class="page-sub-header">
+            Create a agent node with suitable configurations
+        </div>
+    </section>
+    <section class="mt-2 main-page-content">
+        <form asp-action="EditUsersInRole">
+            <div class="my-card mt-5">
+                <div class="my-card-header">
+                    Add or remove users
+                </div>
+                <div class="my-card-body">
+                    <div class="col" style="font-size: 15px">
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <div class="form-check m-1">
+                                <input asp-for="@Model[i].Username" type="hidden"/>
+                                <input asp-for="@Model[i].UserId " type="hidden"/>
+                                <input asp-for="@Model[i].IsSelected" class="form-check-input"/>
+                                <label class="form-check-label" asp-for="@Model[i].IsSelected">
+                                    @Model[i].Username
+                                </label>
+                            </div>
+                        }
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <button type="submit" class="my-btn mr-2" asp-route-roleId="@ViewBag.roleId">Update</button>
+                            <a class="my-btn" asp-action="EditRole" asp-route-id="@ViewBag.roleId">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+</div>

@@ -1,0 +1,205 @@
+﻿@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@inject IHttpContextAccessor _httpContextAccessor
+@{
+    var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" type="image/x-icon" href="~/assets/white-logo.png">
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- icons -->
+    <script
+        type="module"
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+        nomodule
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/css/main.css"/>
+    @await RenderSectionAsync("Styles", false)
+</head>
+<body>
+<!-- Navbar -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="~/assets/white-logo.png" alt=""/>
+        <div class="brand-title">Evision Cloud Platform</div>
+    </a
+    >
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">
+                    <div class="d-flex">
+                        <ion-icon
+                            name="apps-sharp"
+                            style="height: 24px; width: 24px">
+                        </ion-icon>
+                        <div class="ml-2">Services</div>
+                    </div>
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+        <span class="navbar-text d-flex">
+            <a class="nav-link" href="#">
+                @User.Identity.Name (@string.Join(", ", roles))
+            </a>
+            <a class="nav-link" asp-action="Logout" asp-controller="Account">Logout</a>
+        </span
+        >
+    </div>
+</nav>
+<!-- Navbar end -->
+<!-- Sidebar start -->
+<section class="sidebar-section">
+    <div class="my-sidebar">
+        <!-- header block -->
+        <div class="sidebar-header-block">
+            <div class="d-flex align-items-center">
+                <ion-icon name="menu" style="font-size: 20px"></ion-icon>
+                <div class="d-flex flex-column pl-2">
+                    <div style="font-weight: 900; font-size: 15px">
+                        Evision Web Services
+                    </div>
+                    <div style="font-size: 10px; color: #3273a5; font-weight: 600">
+                        Tell us what you think
+                    </div>
+                </div>
+            </div>
+            <ion-icon name="close" style="font-size: 20px"></ion-icon>
+        </div>
+        <!-- header block end -->
+        <!-- menu items -->
+        <div class="sidebar-menu-block">
+            <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item-heading">
+                    <ion-icon name="caret-down"></ion-icon>
+                    <div>Agents</div>
+                </div>
+                <div class="sidebar-submenu">
+                    <a class="sidebar-submenu-item">View Agents</a>
+                    <a class="sidebar-submenu-item">Configure Slave Node</a>
+                    <a class="sidebar-submenu-item">Edit Nodes</a>
+                </div>
+            </div>
+
+            <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item-heading">
+                    <ion-icon name="caret-down"></ion-icon>
+                    <div>Deployment Artifacts</div>
+                </div>
+                <div class="sidebar-submenu">
+                    <a class="sidebar-submenu-item">List Artifacts</a>
+                    <a class="sidebar-submenu-item">Build .NET Core Artifacts</a>
+                    <a class="sidebar-submenu-item">Build MySQL Artifacts</a>
+                </div>
+            </div>
+
+            <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item-heading">
+                    <ion-icon name="caret-down"></ion-icon>
+                    <div>Manage DNS Records</div>
+                </div>
+                <div class="sidebar-submenu">
+                    <a class="sidebar-submenu-item">Add new DNS Record</a>
+                    <a class="sidebar-submenu-item">List DNS Records</a>
+                </div>
+            </div>
+
+            <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item-heading">
+                    <ion-icon name="caret-down"></ion-icon>
+                    <div>Monitoring</div>
+                </div>
+                <div class="sidebar-submenu">
+                    <a class="sidebar-submenu-item">Nodes Health Monitoring</a>
+                    <a class="sidebar-submenu-item">System Uptime Monitoring</a>
+                </div>
+            </div>
+
+            <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item-heading">
+                    <ion-icon name="caret-down"></ion-icon>
+                    <div>Deployment</div>
+                </div>
+                <div class="sidebar-submenu">
+                    <a class="sidebar-submenu-item">Deploy a system</a>
+                    <a class="sidebar-submenu-item">Manage Deployments</a>
+                </div>
+            </div>
+
+            <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item-heading">
+                    <ion-icon name="caret-down"></ion-icon>
+                    <div>Backups</div>
+                </div>
+                <div class="sidebar-submenu">
+                    <a class="sidebar-submenu-item">DB Backups</a>
+                    <a class="sidebar-submenu-item">Restore Backups</a>
+                </div>
+            </div>
+
+            <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item-heading">
+                    <ion-icon name="caret-down"></ion-icon>
+                    <div>IAM</div>
+                </div>
+                <div class="sidebar-submenu">
+                    <a class="sidebar-submenu-item" asp-action="ListUsers" asp-controller="Administration">IAM Users</a>
+                    <a class="sidebar-submenu-item" asp-action="ListRoles" asp-controller="Administration">IAM Roles</a>
+                </div>
+            </div>
+
+            <div class="sidebar-menu-item">
+                <div class="sidebar-menu-item-heading">
+                    <ion-icon name="caret-down"></ion-icon>
+                    <div>Setup and Install</div>
+                </div>
+                <div class="sidebar-submenu">
+                    <a class="sidebar-submenu-item">Installation Guide</a>
+                </div>
+            </div>
+        </div>
+        <!-- menu items end -->
+    </div>
+</section>
+<!-- Sidebar end -->
+<!-- Main container -->
+<section class="main-container-section">
+    <!-- page content -->
+    @RenderBody()
+    <!-- page content end -->
+</section>
+<!-- Main container end -->
+</body>
+@await RenderSectionAsync("Scripts", required: false)
+</html>

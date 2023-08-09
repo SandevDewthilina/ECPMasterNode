@@ -1,0 +1,62 @@
+﻿@model ECPMaster.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LoginLayout";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/login/login.css"/>
+}
+
+<div class="login-container-wrapper">
+    <form asp-action="Login">
+        <div class="login-main-container">
+            <!-- logo -->
+            <img
+                class="login-main-logo"
+                src="~/assets/black-logo.png"
+                alt="ecp logo"/>
+            <!-- login heading -->
+            <p class="login-header mb-4 mt-3">Login to Evison Cloud Platform</p>
+            <!-- input group -->
+            <div class="col">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="my-input-label mb-1">IAM User email address</div>
+                <div class="my-input-footer-label mb-2">
+                    Choose a name for your account. You can change this name in your
+                    account settings after you sign up.
+                </div>
+                <input
+                    class="form-control"
+                    type="email"
+                    asp-for="Email"
+                    placeholder="e.g. example@evision.com"/>
+                <div class="mt-4"></div>
+                <div class="my-input-label mb-1">IAM User password</div>
+                <div class="my-input-footer-label mb-2">
+                    Enter your secured password to access features
+                </div>
+                <input class="form-control" asp-for="Password" type="password" placeholder="Password"/>
+            </div>
+            <div class="col text-center">
+                <!-- verify btn -->
+                <button type="submit" class="verify-btn mt-5 mb-3">Verify Credentials</button>
+            </div>
+
+            <!-- seperator -->
+            <div class="row col">
+                <div class="col-sm-5">
+                    <hr/>
+                </div>
+                <div class="col-sm-2 text-center" style="color: grey">OR</div>
+                <div class="col-sm-5">
+                    <hr/>
+                </div>
+            </div>
+
+            <button class="mt-3 my-btn-lg">Create a new ECP account</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,19 @@
+.server-container {
+    display: flex;
+    justify-content: space-between;
+    min-width: 200px;
+    border: 3px solid #B4B4B4;
+    border-radius: 5px;
+    padding: 20px 20px;
+    margin: 10px;
+}
+
+.server-container:hover {
+    border: 3px solid #E48F20;
+}
+.server-container:c {
+    border: 3px solid #E48F20;
+}
+svg {
+    font-size: 17px !important;
+}

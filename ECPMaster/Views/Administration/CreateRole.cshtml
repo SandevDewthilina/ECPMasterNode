@@ -1,0 +1,39 @@
+﻿@model ECPMaster.ViewModels.CreateRoleViewModel
+
+@{
+    ViewData["Title"] = "Create Role";
+}
+
+<div class="container">
+    <section>
+        <div class="page-main-header">@ViewData["Title"]</div>
+        <div class="page-sub-header">
+            Create a agent node with suitable configurations
+        </div>
+    </section>
+    <section class="mt-2 main-page-content">
+        <div class="col-sm-12">
+            <form method="post" asp-action="CreateRole" asp-controller="Administration">
+                 <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="my-card mt-5">
+                    <div class="my-card-header">Create role</div>
+                    <div class="my-card-body">
+                        <div class="my-input-label mb-1">Role name</div>
+                        <input
+                            class="form-control"
+                            type="text"
+                            asp-for="RoleName"
+                            placeholder="e.g. Administrator"/>
+                        <div class="my-input-footer-label mb-2 mt-1">
+                            *Choose a suitable name for the role
+                        </div>
+                        <div class="d-flex justify-content-end mt-2">
+                            <button type="submit" class="my-btn mr-2">Create</button>
+                            <a asp-action="ListRoles" asp-controller="Administration" class="my-btn">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

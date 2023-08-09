@@ -1,0 +1,92 @@
+﻿@model ECPMaster.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_LoginLayout";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/login/login.css"/>
+}
+
+<div class="login-container-wrapper mt-5 mb-5">
+    <div class="login-main-container">
+        <!-- logo -->
+        <img
+            class="login-main-logo"
+            src="~/assets/black-logo.png"
+            alt="ecp logo"/>
+        <!-- login heading -->
+        <p class="login-header mb-4 mt-3">Create a new account in ECP</p>
+        <!-- input group -->
+        <form asp-action="Register">
+            <div class="col">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <!--  -->
+                <div class="my-input-label mb-1">Your email address</div>
+                <div class="my-input-footer-label mb-2">
+                    Choose a name for your account. You can change this name in your
+                    account settings after you sign up.
+                </div>
+                <input
+                    class="form-control"
+                    type="email"
+                    asp-for="Email"
+                    placeholder="e.g. example@evision.com"/>
+                <div class="mt-2"></div>
+                <!--  -->
+                <div class="my-input-label mb-1">Your username</div>
+                <div class="my-input-footer-label mb-2">
+                    Choose a suitable username for your account.
+                </div>
+                <input
+                    class="form-control"
+                    type="text"
+                    asp-for="Username"
+                    placeholder="e.g. Andrew Garfield"/>
+                <div class="mt-2"></div>
+                <!--  -->
+                <div class="my-input-label mb-1">New Password</div>
+                <div class="my-input-footer-label mb-2">
+                    Enter your secured password to access features
+                </div>
+                <input
+                    class="form-control"
+                    type="password"
+                    asp-for="NewPassword"
+                    placeholder="New password"/>
+                <div class="mt-2"></div>
+                <!--  -->
+                <div class="my-input-label mb-1">Confirm password</div>
+                <div class="my-input-footer-label mb-2">
+                    Enter your password again to confirm
+                </div>
+                <input
+                    class="form-control"
+                    type="password"
+                    asp-for="ConfirmPassword"
+                    placeholder="Confirm password"/>
+            </div>
+
+            <!-- verify btn -->
+            <div class="col text-center">
+                <button type="submit" class="verify-btn mt-5 mb-3">Verify Credentials</button>
+            </div>
+        </form>
+
+
+        <!-- seperator -->
+        <div class="row col">
+            <div class="col-sm-5">
+                <hr/>
+            </div>
+            <div class="col-sm-2 text-center" style="color: grey">OR</div>
+            <div class="col-sm-5">
+                <hr/>
+            </div>
+        </div>
+
+        <button class="mt-3 my-btn-lg">Already have a new ECP account</button>
+    </div>
+</div>

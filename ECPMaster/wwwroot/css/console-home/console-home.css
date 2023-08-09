@@ -1,0 +1,28 @@
+.service-item {
+    display: flex;
+    width: 300px;
+    margin-bottom: 30px;
+}
+
+.service-item img {
+    width: 32px;
+    height: 32px;
+    margin-right: 25px;
+}
+
+.service-header {
+    color: #9EAAAB;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.service-option-title {
+    color: black;
+    font-weight: 500;
+}
+.service-option-subtitle{
+    color: #9EAAAB;
+    font-size: 10px;
+    margin-bottom: 5px;
+}

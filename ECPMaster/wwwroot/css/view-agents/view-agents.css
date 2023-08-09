@@ -1,0 +1,38 @@
+.agent-block {
+  width: 700px;
+}
+
+.agent-inner-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-pair {
+  margin-bottom: 15px;
+}
+
+.agent-block {
+  margin: 5px 0;
+}
+
+.agent-half-block {
+  width: 340px;
+  padding-left: 15px;
+}
+
+.info-pair-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #5d5f5f;
+}
+
+.info-pair-subtitle {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 900;
+  color: black;
+}
+.info-pair-subtitle svg {
+  font-size: 17px !important;
+}

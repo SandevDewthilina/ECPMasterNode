@@ -1,0 +1,251 @@
+@{
+    ViewData["Title"] = "Web Services";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/console-home/console-home.css"/>
+}
+
+<div class="container">
+<section>
+    <div class="page-main-header">@ViewData["Title"]</div>
+    <div class="page-sub-header">
+        Select the features provided by the Evision Cloud Platform.
+    </div>
+</section>
+<section class="mt-5 main-page-content">
+<div class="row">
+<div class="col-sm-12">
+<div class="my-card">
+<div class="my-card-header">Manage Services</div>
+<div class="my-card-body">
+<div class="d-flex justify-content-between flex-wrap px-4">
+<!-- service block -->
+<div class="service-item">
+    <img src="~/assets/agents-aws.png" alt=""/>
+    <div class="service-item-data d-flex flex-column">
+        <div class="service-header">Agents</div>
+        <div class="service-options">
+            <div class="service-option">
+                <!-- service options -->
+                <a class="service-option-title" href="#">
+                    View Agents
+                </a
+                >
+                <div class="service-option-subtitle">
+                    View Currently working slave nodes
+                </div>
+            </div>
+            <div class="service-option">
+                <a class="service-option-title" href="#">
+                    Configure Slave Node
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Configure a new slave node that act as a agent for
+                    the control environment
+                </div>
+            </div>
+            <div class="service-option">
+                <a class="service-option-title" href="#">
+                    Edit Nodes
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Edit Nodes that are connected to the System
+                </div>
+            </div>
+            <!-- service options -->
+        </div>
+    </div>
+</div>
+<!-- service block end -->
+<!-- service block -->
+<div class="service-item">
+    <img
+        src="~/assets/deployments-artifacts-aws.png"
+        alt=""/>
+    <div class="service-item-data d-flex flex-column">
+        <div class="service-header">Deployment Artifacts</div>
+        <div class="service-options">
+            <div class="service-option">
+                <!-- service options -->
+                <a class="service-option-title" href="#">
+                    List Artifacts
+                </a
+                >
+                <div class="service-option-subtitle">
+                    List of the current built Artifacts from different
+                    Publish folders and MySQL Backups
+                </div>
+            </div>
+            <div class="service-option">
+                <a class="service-option-title" href="#">
+                    Build New Artifacts
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Build a new artifact from publish and MySQL
+                    Backups which can be used for deployments in
+                    future
+                </div>
+            </div>
+            <!-- service options -->
+        </div>
+    </div>
+</div>
+<!-- service block end -->
+<!-- service block -->
+<div class="service-item">
+    <img src="~/assets/manage-dns-aws.png" alt=""/>
+    <div class="service-item-data d-flex flex-column">
+        <div class="service-header">Manage DNS Records</div>
+        <div class="service-options">
+            <div class="service-option">
+                <!-- service options -->
+                <a class="service-option-title" href="#">
+                    Add New DNS Record
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Create a suitable DNS Record with IPv4 and
+                    subdomain using Cloudflare Integration
+                </div>
+            </div>
+            <div class="service-option">
+                <a class="service-option-title" href="#">
+                    List DNS Records
+                </a
+                >
+                <div class="service-option-subtitle">
+                    View currently existing DNS Records
+                </div>
+            </div>
+            <!-- service options -->
+        </div>
+    </div>
+</div>
+<!-- service block end -->
+<!-- service block -->
+<div class="service-item">
+    <img src="~/assets/health-monitoring-aws.png" alt=""/>
+    <div class="service-item-data d-flex flex-column">
+        <div class="service-header">Monitoring</div>
+        <div class="service-options">
+            <div class="service-option">
+                <!-- service options -->
+                <a class="service-option-title" href="#">
+                    Nodes Health Monitoring
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Monitor all system parameters of Nodes connected
+                    to the system
+                </div>
+            </div>
+            <div class="service-option">
+                <a class="service-option-title" href="#">
+                    System Uptime Monitoring
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Monitor uptime of the connected nodes to the
+                    system
+                </div>
+            </div>
+            <div class="service-option">
+                <a class="service-option-title" href="#">
+                    System Logs
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Query system Logs
+                </div>
+            </div>
+            <!-- service options -->
+        </div>
+    </div>
+</div>
+<!-- service block end -->
+<!-- service block -->
+<div class="service-item">
+    <img src="~/assets/agents-aws.png" alt=""/>
+    <div class="service-item-data d-flex flex-column">
+        <div class="service-header">Backups</div>
+        <div class="service-options">
+            <div class="service-option">
+                <!-- service options -->
+                <a class="service-option-title" href="#">
+                    DB Backups
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Control MySQL Backups with incremental versions
+                </div>
+            </div>
+            <div class="service-option">
+                <a class="service-option-title" href="#">
+                    Restore Backups
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Restore MySQL Dumps with using Duplacity
+                </div>
+            </div>
+            <!-- service options -->
+        </div>
+    </div>
+</div>
+<!-- service block end -->
+<!-- service block -->
+<div class="service-item">
+    <img src="~/assets/iam-aws.png" alt=""/>
+    <div class="service-item-data d-flex flex-column">
+        <div class="service-header">IAM</div>
+        <div class="service-options">
+            <div class="service-option">
+                <!-- service options -->
+                <a class="service-option-title" href="#">
+                    User Access Control
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Manage users, roles and access control
+                </div>
+            </div>
+            <!-- service options end -->
+        </div>
+    </div>
+</div>
+<!-- service block end -->
+<!-- service block -->
+<div class="service-item">
+    <img src="~/assets/setup-and-install-aws.png" alt=""/>
+    <div class="service-item-data d-flex flex-column">
+        <div class="service-header">Setup and Install</div>
+        <div class="service-options">
+            <div class="service-option">
+                <!-- service options -->
+                <a class="service-option-title" href="#">
+                    Installation Guide
+                </a
+                >
+                <div class="service-option-subtitle">
+                    Installation Guides for initial slave node setup.
+                    Configuration files to install and Default
+                    packages that needs to be installed.
+                </div>
+            </div>
+            <!-- service options -->
+        </div>
+    </div>
+</div>
+<!-- service block end -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
