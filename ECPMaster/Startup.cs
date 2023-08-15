@@ -82,7 +82,7 @@ namespace ECPMaster
 
 
             app.UseStaticFiles();
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseAuthentication();
 
             app.UseRouting();

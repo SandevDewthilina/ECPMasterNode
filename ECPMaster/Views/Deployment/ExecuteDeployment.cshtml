@@ -177,6 +177,10 @@
 
 @section Scripts
 {
+    <script
+        src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+        integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+        crossorigin="anonymous"></script>
     <script>
          const term = document.getElementById("terminal");
          term.value = "";
@@ -201,8 +205,41 @@
            term.scrollTop = term.scrollHeight;
          }
      
-         writeln("docker ps --all")
-         // writeln("😁")
-         // writeln("\u{1F60A}")
+         const randomUUID = generateUUID();
+             // Connect to the socket.io server
+             const socket = io("http://68.183.190.210:12000", {
+               query: {
+                 sessionID: randomUUID,
+                 customData: "additionalInfo",
+               },
+             }); // Replace with your server URL
+         
+             // Listen for events from the server
+             socket.on("connect", () => {
+               console.log("Connected to server");
+               writeln("Connected to server")
+             });
+         
+             socket.on("privateStream", (data) => {
+               console.log("Received message:", data);
+               try {
+                 writeln(JSON.parse(data).content)
+               } catch (e) {
+                   writeln(data)
+                   }
+             });
+         
+             function generateUUID() {
+               let uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+                 /[xy]/g,
+                 function (c) {
+                   const r = (Math.random() * 16) | 0;
+                   const v = c === "x" ? r : (r & 0x3) | 0x8;
+                   return v.toString(16);
+                 }
+               );
+         
+               return uuid;
+             }
        </script>
 }
