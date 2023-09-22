@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using ECPMaster.AnsibleCLI;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECPMaster.Controllers
@@ -6,8 +8,15 @@ namespace ECPMaster.Controllers
     [Authorize]
     public class AgentsController : Controller
     {
-        public IActionResult ViewAgents()
+        private readonly IAnsibleRepository _ansibleRepository;
+
+        public AgentsController(IAnsibleRepository ansibleRepository)
         {
+            _ansibleRepository = ansibleRepository;
+        }
+        public async Task<IActionResult> ViewAgents()
+        {
+            var results= Json(await _ansibleRepository.GetAgentList());
             return View();
         }
 
