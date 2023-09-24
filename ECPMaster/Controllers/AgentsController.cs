@@ -16,6 +16,7 @@ namespace ECPMaster.Controllers
         }
         public IActionResult ViewAgents()
         {
+            
             return View();
         }
 
