@@ -1,0 +1,22 @@
+﻿
+# refer this LINK for other installations
+# https://www.youtube.com/watch?v=5bEAZ0La_Xo
+config ansible for ubuntu:
+  - sudo apt update
+  - sudo apt install software-properties-common
+  - sudo apt-add-repository ppa:ansible/ansible
+  - sudo apt update
+  - sudo apt install ansible
+  - ansible --version
+
+add a ansible config file for store credentials, etc:
+  - create a inventory file myHosts.txt
+  - add content as bellow
+# 16.170.140.133 ansible_ssh_user=root ansible_ssh_pass=sandevdsic123
+  - mkdir /etc/ansible
+  - nano /etc/ansible/ansible.cfg
+  - paste
+# [defaults]
+# inventory = /home/ubuntu/myHosts.txt
+  - test connection by 
+# ansible all -m package -a "name=net-tools state=present"

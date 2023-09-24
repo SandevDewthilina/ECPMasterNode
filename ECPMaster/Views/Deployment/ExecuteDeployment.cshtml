@@ -1,0 +1,245 @@
+﻿@{
+    ViewData["Title"] = "Execute Deployment";
+    Layout = "_Layout";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/deployment-pipeline/deploying.css"/>
+}
+
+<div class="container">
+    <section>
+        <div class="page-main-header">@ViewData["Title"]</div>
+        <div class="page-sub-header">
+            Build and deploy a system from current artifacts
+        </div>
+    </section>
+    <section class="mt-2 main-page-content">
+        <div class="col-sm-12">
+            <div class="my-card status-container mt-4">
+                <div class="my-card-header">Execution in progress</div>
+                <div class="my-card-body p-0">
+                    <div class="left-section">
+                        <div class="summary-block">
+                            <!-- task item -->
+                            <div class="task-item">
+                                <div class="task-info d-flex align-items-center">
+                                    <ion-icon name="checkmark-circle-sharp" class="mx-4 my-3"></ion-icon>
+                                    <div class="d-flex flex-column align-items-start">
+                                        <div style="font-size: 14px; font-weight: 600">
+                                            Deployment Server Available
+                                        </div>
+                                        <div style="font-size: 10px">1 successful check</div>
+                                    </div>
+                                </div>
+                                <div class="subtask-list">
+                                    <div class="subtask">
+                                        <ion-icon
+                                            name="checkmark-outline"
+                                            class="mx-4">
+                                        </ion-icon>
+                                        <div>make a status check to server</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- task item end -->
+                            <!-- task item -->
+                            <div class="task-item">
+                                <div class="task-info d-flex align-items-center">
+                                    <ion-icon name="checkmark-circle-sharp" class="mx-4 my-3"></ion-icon>
+                                    <div class="d-flex flex-column align-items-start">
+                                        <div style="font-size: 14px; font-weight: 600">
+                                            Connection established
+                                        </div>
+                                        <div style="font-size: 10px">2 successful check</div>
+                                    </div>
+                                </div>
+                                <div class="subtask-list">
+                                    <div class="subtask">
+                                        <ion-icon
+                                            name="checkmark-outline"
+                                            class="mx-4">
+                                        </ion-icon>
+                                        <div>
+                                            make a web socket / UDP connection with server
+                                        </div>
+                                    </div>
+                                    <div class="subtask">
+                                        <ion-icon
+                                            name="checkmark-outline"
+                                            class="mx-4">
+                                        </ion-icon>
+                                        <div>server accepted the connection</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- task item end -->
+                            <!-- task item -->
+                            <div class="task-item">
+                                <div class="task-info d-flex align-items-center">
+                                    <ion-icon name="checkmark-circle-sharp" class="mx-4 my-3"></ion-icon>
+                                    <div class="d-flex flex-column align-items-start">
+                                        <div style="font-size: 14px; font-weight: 600">
+                                            Build the docker-compose.yaml file
+                                        </div>
+                                        <div style="font-size: 10px">1 successful check</div>
+                                    </div>
+                                </div>
+                                <div class="subtask-list">
+                                    <div class="subtask">
+                                        <ion-icon
+                                            name="checkmark-outline"
+                                            class="mx-4">
+                                        </ion-icon>
+                                        <div>
+                                            created a docker compose file with variables
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- task item end -->
+                            <!-- task item -->
+                            <div class="task-item">
+                                <div class="task-info d-flex align-items-center">
+                                    <ion-icon name="checkmark-circle-sharp" class="mx-4 my-3"></ion-icon>
+                                    <div class="d-flex flex-column align-items-start">
+                                        <div style="font-size: 14px; font-weight: 600">
+                                            Execute the docker compose file
+                                        </div>
+                                        <div style="font-size: 10px">2 successful check</div>
+                                    </div>
+                                </div>
+                                <div class="subtask-list">
+                                    <div class="subtask">
+                                        <ion-icon
+                                            name="checkmark-outline"
+                                            class="mx-4">
+                                        </ion-icon>
+                                        <div>
+                                            created docker volumes / copy docker-compose.yaml
+                                        </div>
+                                    </div>
+                                    <div class="subtask">
+                                        <ion-icon
+                                            name="checkmark-outline"
+                                            class="mx-4">
+                                        </ion-icon>
+                                        <div>executed command --docker compose up</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- task item end -->
+                            <!-- task item -->
+                            <div class="task-item">
+                                <div class="task-info d-flex align-items-center">
+                                    <ion-icon name="checkmark-circle-sharp" class="mx-4 my-3"></ion-icon>
+                                    <div class="d-flex flex-column align-items-start">
+                                        <div style="font-size: 14px; font-weight: 600">
+                                            docker compose status
+                                        </div>
+                                        <div style="font-size: 10px">1 successful check</div>
+                                    </div>
+                                </div>
+                                <div class="subtask-list">
+                                    <div class="subtask">
+                                        <ion-icon
+                                            name="checkmark-outline"
+                                            class="mx-4">
+                                        </ion-icon>
+                                        <div>
+                                            run docker compose logs and check if the system is
+                                            live
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- task item end -->
+                        </div>
+                    </div>
+                    <div class="right-section p-0">
+                        <div class="my-card">
+                            <div class="my-card-header">Virtual Terminal</div>
+                            <div class="my-card-body">
+                                <textarea
+                        disabled
+                        class="output"
+                        id="terminal"
+                      ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts
+{
+    <script
+        src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+        integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+        crossorigin="anonymous"></script>
+    <script>
+         const term = document.getElementById("terminal");
+         term.value = "";
+     
+         function removeBackspaces(input) {
+           const output = [];
+     
+           for (const char of input) {
+             if (char === "\b") {
+               output.pop(); // Remove the last character
+             } else {
+               output.push(char);
+             }
+           }
+     
+           return output.join("");
+         }
+     
+         function writeln(line) {
+           const stringWithoutBackspaces = removeBackspaces(line);
+           term.value += stringWithoutBackspaces + "\n";
+           term.scrollTop = term.scrollHeight;
+         }
+     
+         const randomUUID = generateUUID();
+             // Connect to the socket.io server
+             const socket = io("http://68.183.190.210:12000", {
+               query: {
+                 sessionID: randomUUID,
+                 customData: "additionalInfo",
+               },
+             }); // Replace with your server URL
+         
+             // Listen for events from the server
+             socket.on("connect", () => {
+               console.log("Connected to server");
+               writeln("Connected to server")
+             });
+         
+             socket.on("privateStream", (data) => {
+               console.log("Received message:", data);
+               try {
+                 writeln(JSON.parse(data).content)
+               } catch (e) {
+                   writeln(data)
+                   }
+             });
+         
+             function generateUUID() {
+               let uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+                 /[xy]/g,
+                 function (c) {
+                   const r = (Math.random() * 16) | 0;
+                   const v = c === "x" ? r : (r & 0x3) | 0x8;
+                   return v.toString(16);
+                 }
+               );
+         
+               return uuid;
+             }
+       </script>
+}

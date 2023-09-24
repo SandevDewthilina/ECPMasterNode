@@ -106,9 +106,9 @@
                     <div>Agents</div>
                 </div>
                 <div class="sidebar-submenu">
-                    <a class="sidebar-submenu-item">View Agents</a>
-                    <a class="sidebar-submenu-item">Configure Slave Node</a>
-                    <a class="sidebar-submenu-item">Edit Nodes</a>
+                    <a class="sidebar-submenu-item" asp-action="ViewAgents" asp-controller="Agents">View Agents</a>
+                    <a class="sidebar-submenu-item" asp-action="ConfigureAgent" asp-controller="Agents">Configure Slave Node</a>
+                    <a class="sidebar-submenu-item" asp-action="EditSlaveNodes" asp-controller="Agents">Edit Nodes</a>
                 </div>
             </div>
 
@@ -118,9 +118,9 @@
                     <div>Deployment Artifacts</div>
                 </div>
                 <div class="sidebar-submenu">
-                    <a class="sidebar-submenu-item">List Artifacts</a>
-                    <a class="sidebar-submenu-item">Build .NET Core Artifacts</a>
-                    <a class="sidebar-submenu-item">Build MySQL Artifacts</a>
+                    <a class="sidebar-submenu-item" asp-action="ListArtifacts" asp-controller="Artifacts">List Artifacts</a>
+                    @* <a class="sidebar-submenu-item">Build .NET Core Artifacts</a> *@
+                    @* <a class="sidebar-submenu-item">Build MySQL Artifacts</a> *@
                 </div>
             </div>
 
@@ -141,8 +141,8 @@
                     <div>Monitoring</div>
                 </div>
                 <div class="sidebar-submenu">
-                    <a class="sidebar-submenu-item">Nodes Health Monitoring</a>
-                    <a class="sidebar-submenu-item">System Uptime Monitoring</a>
+                    <a class="sidebar-submenu-item" asp-action="NodesMonitoring" asp-controller="Monitoring">Nodes Health Monitoring</a>
+                    @* <a class="sidebar-submenu-item">System Uptime Monitoring</a> *@
                 </div>
             </div>
 
@@ -152,7 +152,7 @@
                     <div>Deployment</div>
                 </div>
                 <div class="sidebar-submenu">
-                    <a class="sidebar-submenu-item">Deploy a system</a>
+                    <a class="sidebar-submenu-item" asp-action="DeploymentPipeline" asp-controller="Deployment">Deploy a system</a>
                     <a class="sidebar-submenu-item">Manage Deployments</a>
                 </div>
             </div>
