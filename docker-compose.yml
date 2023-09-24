@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  ecp-master-service:
+    image: ecp-main-image
+    # command: npm run dev
+    # volumes:
+    #   - .:/usr/app/
+    #   - /usr/app/node_modules
+    ports:
+      - "80:5000"
+    restart: always
