@@ -30,6 +30,7 @@ namespace ECPMaster.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> RunCommand(string command)
         {
             return Json(await _ansibleRepository.RunCommand(command));
