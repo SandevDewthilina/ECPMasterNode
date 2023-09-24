@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 EXPOSE 5000
 EXPOSE 5001
@@ -14,9 +14,10 @@ RUN dotnet build "ECPMaster.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "ECPMaster.csproj" -c Release -o /app/publish
 
-FROM node:18 as nm
-WORKDIR /app/publish
+FROM node:18 as npm
+COPY /app/publish/package.json .
 RUN npm install
+COPY --from=npm node_modules /app/publish
 
 FROM base AS final
 WORKDIR /app
