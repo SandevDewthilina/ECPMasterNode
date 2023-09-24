@@ -14,9 +14,8 @@ namespace ECPMaster.Controllers
         {
             _ansibleRepository = ansibleRepository;
         }
-        public async Task<IActionResult> ViewAgents()
+        public IActionResult ViewAgents()
         {
-            var results= Json(await _ansibleRepository.GetAgentList());
             return View();
         }
 
@@ -28,6 +27,11 @@ namespace ECPMaster.Controllers
         public IActionResult EditSlaveNodes()
         {
             return View();
+        }
+
+        public async Task<IActionResult> RunCommand(string command)
+        {
+            return Json(await _ansibleRepository.RunCommand(command));
         }
     }
 }

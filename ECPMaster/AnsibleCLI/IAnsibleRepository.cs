@@ -9,7 +9,7 @@ namespace ECPMaster.AnsibleCLI
 {
     public interface IAnsibleRepository
     {
-        Task<string> GetAgentList();
+        Task<string> RunCommand(string command);
     }
 
     public class AnsibleRepository : IAnsibleRepository
@@ -80,10 +80,9 @@ namespace ECPMaster.AnsibleCLI
             return output.ToString();
         }
 
-        public async Task<string> GetAgentList()
+        public async Task<string> RunCommand(string command)
         {
-            // ansible all -m setup
-            return await RunCommandAndGetOutputAsync("dir");
+            return await RunCommandAndGetOutputAsync(command);
         }
     }
 }
