@@ -23,6 +23,6 @@ RUN dotnet publish "ECPMaster.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY --from=npmstage /code/node_modules /app
+COPY --from=npmstage /code/node_modules /app/node_modules/
 RUN ls /app
 ENTRYPOINT ["dotnet", "ECPMaster.dll"]
