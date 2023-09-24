@@ -14,13 +14,11 @@ RUN dotnet build "ECPMaster.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "ECPMaster.csproj" -c Release -o /app/publish
 
-FROM node:18 as npm
-COPY /app/publish/package.json .
+# Switch to the publish directory and run npm install
+WORKDIR /app/publish
 RUN npm install
-COPY node_modules /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-CMD ls
 ENTRYPOINT ["dotnet", "ECPMaster.dll"]
