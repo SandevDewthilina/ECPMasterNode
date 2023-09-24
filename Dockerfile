@@ -17,7 +17,7 @@ RUN dotnet publish "ECPMaster.csproj" -c Release -o /app/publish
 FROM node:18 as npm
 COPY /app/publish/package.json .
 RUN npm install
-COPY --from=npm node_modules /app/publish
+COPY node_modules /app/publish
 
 FROM base AS final
 WORKDIR /app
