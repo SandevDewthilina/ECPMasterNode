@@ -11,7 +11,6 @@ EXPOSE 5001
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY ["ECPMaster/ECPMaster.csproj", "ECPMaster/"]
-COPY --from=npmstage /code/node_modules ECPMaster/
 RUN dotnet restore "ECPMaster/ECPMaster.csproj"
 COPY . .
 WORKDIR "/src/ECPMaster"
@@ -24,4 +23,6 @@ RUN dotnet publish "ECPMaster.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=npmstage /code/node_modules /app
+RUN ls /app
 ENTRYPOINT ["dotnet", "ECPMaster.dll"]
