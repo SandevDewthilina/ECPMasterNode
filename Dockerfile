@@ -20,9 +20,6 @@ RUN dotnet build "ECPMaster.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "ECPMaster.csproj" -c Release -o /app/publish
 
-# Switch to the publish directory and run npm install
-WORKDIR /app/publish
-RUN npm install
 
 FROM base AS final
 WORKDIR /app
