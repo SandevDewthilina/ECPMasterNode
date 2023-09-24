@@ -22,4 +22,5 @@ COPY node_modules /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+CMD ls
 ENTRYPOINT ["dotnet", "ECPMaster.dll"]
