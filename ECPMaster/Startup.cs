@@ -30,11 +30,11 @@ namespace ECPMaster
         {
             services.AddControllersWithViews();
 
-            var emailConfig = Configuration
-                .GetSection("EmailConfiguration")
-                .Get<EmailConfiguration>();
+            // var emailConfig = Configuration
+            //     .GetSection("EmailConfiguration")
+            //     .Get<EmailConfiguration>();
 
-            services.AddSingleton(emailConfig);
+            // services.AddSingleton(emailConfig);
 
             // MySQL DB connection service
             services.AddDbContextPool<ECPDbContext>(options =>
