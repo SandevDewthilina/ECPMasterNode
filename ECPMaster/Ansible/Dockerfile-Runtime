@@ -1,0 +1,20 @@
+#FROM debian:sid AS base
+#
+#RUN apt-get update && apt-get install -y jq
+#    
+#WORKDIR /app
+#COPY artifacts/publish/appsettings.json ./
+#
+#RUN config=$(cat appsettings.json) && \
+#    echo "$config" | jq -r '.AppSettings.CustomizedAsseblyPath' >> out1.txt
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+WORKDIR /app
+COPY artifacts/publish/ ./
+
+RUN mkdir -p /root/Test_systems/Cherish_V3/publish
+
+EXPOSE 80
+EXPOSE 3306
+
+ENTRYPOINT ["dotnet", "ERP.Web.dll"]
