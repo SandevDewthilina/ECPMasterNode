@@ -24,6 +24,8 @@ inventory = /home/ubuntu/myHosts.txt
 - test connection by
 `ansible all -m package -a "name=net-tools state=present"`
 
+__NOTE__: To run an ansible playbook `ansible-playbook -i /path/to/inventory_file deploy_container.yml`
+
 ### Dynamic variables of a new system
 
 - Port

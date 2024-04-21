@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using ECPMaster.AnsibleCLI;
+using ECPMaster.Ansible;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

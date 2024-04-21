@@ -1,11 +1,14 @@
-﻿using ECPMaster.DbContext;
+﻿using System.Collections.Generic;
+using ECPMaster.Ansible;
+using ECPMaster.DbContext;
+using ECPMaster.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace ECPMaster.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -21,6 +24,13 @@ namespace ECPMaster.Controllers
         {
 
             return View();
+        }
+
+        public object Yaml()
+        {
+            return AnsibleBuilder.BuildAnsiblePlaybook("Deploy docker container", "rl",true)
+                .AddServiceModule("Ensure docker is running", "docker", State.started)
+                .AddDockerContainerModule("Deploy Docker container", "nginx-test", "nginx:latest",State.started, ports: new List<string>() {"80:80"}).Build();
         }
     }
 }
