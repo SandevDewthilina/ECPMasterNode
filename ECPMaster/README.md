@@ -26,12 +26,6 @@ inventory = /home/ubuntu/myHosts.txt
 
 __NOTE__: To run an ansible playbook `ansible-playbook -i /path/to/inventory_file deploy_container.yml`
 
-### Dynamic variables of a new system
-
-- Port
-- MySQL Database / Password
-- Backup file
-
 ### Install docker on Rocky linux 9
 
 ```bash

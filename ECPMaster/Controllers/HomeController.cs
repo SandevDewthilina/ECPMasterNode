@@ -28,9 +28,12 @@ namespace ECPMaster.Controllers
 
         public object Yaml()
         {
-            return AnsibleBuilder.BuildAnsiblePlaybook("Deploy docker container", "rl",true)
+            return AnsibleBuilder.BuildAnsiblePlaybook("Deploy docker container", "rl", true)
                 .AddServiceModule("Ensure docker is running", "docker", State.started)
-                .AddDockerContainerModule("Deploy Docker container", "nginx-test", "nginx:latest",State.started, ports: new List<string>() {"80:80"}).Build();
+                .AddDockerContainerModule("Deploy Docker container", "nginx-test", "nginx:latest", State.started,
+                    ports: new List<string>() { "80:80" })
+                .Build()
+                .SaveFile();
         }
     }
 }

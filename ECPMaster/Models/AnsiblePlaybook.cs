@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace ECPMaster.Models
@@ -8,6 +10,26 @@ namespace ECPMaster.Models
     public class AnsiblePlaybook
     {
         public List<Dictionary<string, dynamic>> Content { get; set; }
+        
+        public string ToYaml()
+        {
+            var serializer = new SerializerBuilder()
+                .WithNamingConvention(UnderscoredNamingConvention.Instance)
+                .Build();
+            return serializer.Serialize(Content);
+        }
+
+        public async Task SaveFile()
+        {
+            var yaml = ToYaml();
+            
+            await File.WriteAllTextAsync("/temp.yml", yaml);
+        }
+
+        public async Task Execute()
+        {
+            
+        }
     }
 
     public class ServiceModule

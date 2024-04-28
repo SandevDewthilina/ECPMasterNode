@@ -67,12 +67,9 @@ namespace ECPMaster.Ansible
         }
 
 
-        public string Build()
+        public AnsiblePlaybook Build()
         {
-            var serializer = new SerializerBuilder()
-                .WithNamingConvention(UnderscoredNamingConvention.Instance)
-                .Build();
-            return serializer.Serialize(_playbook.Content);
+            return _playbook;
         }
 
         private static List<Dictionary<string, object>> GetTaskList()

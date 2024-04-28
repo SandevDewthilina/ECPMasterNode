@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using AutoMapper;
-using ECPMaster.Ansible;
 using ECPMaster.AsyncDataServices;
 using ECPMaster.DbContext;
 using ECPMaster.Models;
@@ -54,7 +53,6 @@ namespace ECPMaster
             // Automapper service for DTO's
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSingleton<IRabbitMqClient, RabbitMqClient>();
-            services.AddScoped<IAnsibleRepository, AnsibleRepository>();
 
             // Repository dependancy injection
 
