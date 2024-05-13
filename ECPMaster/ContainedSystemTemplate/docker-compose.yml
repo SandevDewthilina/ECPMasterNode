@@ -1,19 +1,26 @@
 version: '3.1'
 services:
   db:
-    image: mysql
+    image: mysql:8.3.0
     # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
     # (this is just an example, not intended to be a production configuration)
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root123
-      MYSQL_DATABASE: ecpmasterdb
+      MYSQL_ROOT_PASSWORD: r00t1@88Hetz2022
+      MYSQL_DATABASE: cherish_v3
     ports:
-      - 3306:3306
+      - "3306:3306"
+    volumes:
+      - ./artifacts/:/docker-entrypoint-initdb.d/
+      - ./mysql-volume:/var/lib/mysql
 
-  adminer:
-    image: adminer
-    restart: always
+  web:
+    image: system-1
+    platform: linux/amd64
+    extra_hosts:
+      - "localhost:host-gateway"
     ports:
-      - 8080:8080
+      - "6555:6555"
+    depends_on: 
+      - db

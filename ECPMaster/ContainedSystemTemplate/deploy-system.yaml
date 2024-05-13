@@ -1,0 +1,75 @@
+---
+- name: Download and deploy application in Docker
+  hosts: rl-m1
+  become: true
+  become_user: ecp
+  tasks:
+    - name: Clean Workspace
+      ansible.builtin.file:
+        path: /home/ecp/ws1
+        state: absent
+
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /home/ecp/ws1
+        state: directory
+        mode: '0755'
+
+    - name: Download ZIP file
+      get_url:
+        url: "http://159.223.54.208:9000/ecp-core/artifacts.zip"
+        dest: "/home/ecp/ws1/downloaded_file.zip"
+
+    - name: Unzip the file
+      command: unzip /home/ecp/ws1/downloaded_file.zip -d /home/ecp/ws1/downloaded_file
+
+    - name: Create Dockerfile
+      template:
+        src: Dockerfile
+        dest: /home/ecp/ws1/downloaded_file/Dockerfile
+
+    - name: Log into DockerHub
+      docker_login:
+        username: sandevdewthilina2000@gmail.com
+        password: sandevdsic123
+
+    - name: Build an image and push it to a private repo
+      community.docker.docker_image:
+        build:
+          path: /home/ecp/ws1/downloaded_file
+        name: sandevdewthilina/ecp-core
+        tag: deployment-v1
+        push: true
+        source: build
+
+    - name: Ensure docker is running
+      service:
+        name: docker
+        state: started
+        
+    - name: Create Database
+      command: "docker exec -i mysql-core mysql -u root --password=r00t1@88Hetz2022 -e \"CREATE DATABASE IF NOT EXISTS cherish_v3\""
+      
+    - name: Copy backup to Docker
+      command: "docker cp /home/ecp/ws1/downloaded_file/artifacts/goldencopy_v2_20240216_164002.sql mysql-core:/tmp/goldencopy_v2_20240216_164002.sql"
+   
+    - name: Restore database
+      command: "docker exec -i mysql-core mysql -u root --password=r00t1@88Hetz2022 -e \"use cherish_v3; source /tmp/goldencopy_v2_20240216_164002.sql\""
+      ignore_errors: yes
+      
+    - name: Deploy Docker container
+      docker_container:
+        name: deployment-v1
+        image: sandevdewthilina/ecp-core:deployment-v1
+        state: started
+        restart_policy: no
+        ports:
+          - 8000:6555
+        volumes:
+        etc_hosts:
+          localhost: host-gateway
+
+    - name: Clean Workspace
+      ansible.builtin.file:
+        path: /home/ecp/ws1
+        state: absent

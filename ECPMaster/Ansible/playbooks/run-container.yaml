@@ -1,0 +1,18 @@
+- name: Deploy docker container
+  hosts: rl
+  become: true
+  become_user: ecp
+  tasks:
+    - name: Ensure docker is running
+      service:
+        name: docker
+        state: started
+    - name: Deploy Docker container
+      docker_container:
+        name: nginx-test
+        image: nginx:latest
+        state: started
+        restart_policy: no
+        ports:
+          - 80:80
+        volumes:

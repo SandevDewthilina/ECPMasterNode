@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="~/css/deployment-pipeline/deploying.css"/>
 }
 
+@model ECPMaster.ViewModels.ExecutionViewModel
+
 <div class="container">
     <section>
         <div class="page-main-header">@ViewData["Title"]</div>
@@ -159,7 +161,7 @@
                     </div>
                     <div class="right-section p-0">
                         <div class="my-card">
-                            <div class="my-card-header">Virtual Terminal</div>
+                            <div class="my-card-header"><img id="rotating-image" src="/assets/loader.gif" class="mr-2" alt="" style="height: 15px; width: 15px;">Virtual Terminal</div>
                             <div class="my-card-body">
                                 <textarea
                         disabled
@@ -177,69 +179,83 @@
 
 @section Scripts
 {
-    <script
-        src="https://cdn.socket.io/4.6.0/socket.io.min.js"
-        integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
-        crossorigin="anonymous"></script>
+    @* <script *@
+    @*     src="https://cdn.socket.io/4.6.0/socket.io.min.js" *@
+    @*     integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" *@
+    @*     crossorigin="anonymous"></script> *@
     <script>
          const term = document.getElementById("terminal");
-         term.value = "";
-     
-         function removeBackspaces(input) {
-           const output = [];
-     
-           for (const char of input) {
-             if (char === "\b") {
-               output.pop(); // Remove the last character
-             } else {
-               output.push(char);
-             }
-           }
-     
-           return output.join("");
-         }
-     
-         function writeln(line) {
-           const stringWithoutBackspaces = removeBackspaces(line);
-           term.value += stringWithoutBackspaces + "\n";
-           term.scrollTop = term.scrollHeight;
-         }
-     
-         const randomUUID = generateUUID();
-             // Connect to the socket.io server
-             const socket = io("http://68.183.190.210:12000", {
-               query: {
-                 sessionID: randomUUID,
-                 customData: "additionalInfo",
-               },
-             }); // Replace with your server URL
-         
-             // Listen for events from the server
-             socket.on("connect", () => {
-               console.log("Connected to server");
-               writeln("Connected to server")
-             });
-         
-             socket.on("privateStream", (data) => {
-               console.log("Received message:", data);
-               try {
-                 writeln(JSON.parse(data).content)
-               } catch (e) {
-                   writeln(data)
-                   }
-             });
-         
-             function generateUUID() {
-               let uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-                 /[xy]/g,
-                 function (c) {
-                   const r = (Math.random() * 16) | 0;
-                   const v = c === "x" ? r : (r & 0x3) | 0x8;
-                   return v.toString(16);
-                 }
-               );
-         
-               return uuid;
-             }
-       </script>
+          term.value = "";
+    @*   *@
+    @*      function removeBackspaces(input) { *@
+    @*        const output = []; *@
+    @*   *@
+    @*        for (const char of input) { *@
+    @*          if (char === "\b") { *@
+    @*            output.pop(); // Remove the last character *@
+    @*          } else { *@
+    @*            output.push(char); *@
+    @*          } *@
+    @*        } *@
+    @*   *@
+    @*        return output.join(""); *@
+    @*      } *@
+    let urlParams = new URLSearchParams(window.location.search);
+    
+  function writeln(log) {
+    term.value += log.line + "\n";
+    term.scrollTop = term.scrollHeight;
+    lastId = log.id;
+  }
+  
+  let lastId = 0;
+  
+  setInterval(() => {
+      fetch('/api/DeploymentApi/GetLogs?deploymentId=' + urlParams.get('deploymentId') + '&offset=' + lastId)
+        .then(response => response.json())
+        .then(data => {
+          data.forEach((log) => writeln(log))
+        })
+        .catch(error => {
+          console.error('Error fetching JSON:', error);
+        });
+  },3000)
+    @*   *@
+    @*      const randomUUID = generateUUID(); *@
+    @*          // Connect to the socket.io server *@
+    @*          const socket = io("http://68.183.190.210:12000", { *@
+    @*            query: { *@
+    @*              sessionID: randomUUID, *@
+    @*              customData: "additionalInfo", *@
+    @*            }, *@
+    @*          }); // Replace with your server URL *@
+    @*       *@
+    @*          // Listen for events from the server *@
+    @*          socket.on("connect", () => { *@
+    @*            console.log("Connected to server"); *@
+    @*            writeln("Connected to server") *@
+    @*          }); *@
+    @*       *@
+    @*          socket.on("privateStream", (data) => { *@
+    @*            console.log("Received message:", data); *@
+    @*            try { *@
+    @*              writeln(JSON.parse(data).content) *@
+    @*            } catch (e) { *@
+    @*                writeln(data) *@
+    @*                } *@
+    @*          }); *@
+    @*       *@
+    @*          function generateUUID() { *@
+    @*            let uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace( *@
+    @*              /[xy]/g, *@
+    @*              function (c) { *@
+    @*                const r = (Math.random() * 16) | 0; *@
+    @*                const v = c === "x" ? r : (r & 0x3) | 0x8; *@
+    @*                return v.toString(16); *@
+    @*              } *@
+    @*            ); *@
+    @*       *@
+    @*            return uuid; *@
+    @*          } *@
+    </script>
 }
