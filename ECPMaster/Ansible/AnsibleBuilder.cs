@@ -35,7 +35,52 @@ namespace ECPMaster.Ansible
             return new AnsibleBuilder(_playbook);
         }
 
-        public AnsibleBuilder AddServiceModule(string taskName, string name, State state)
+        public AnsibleBuilder AddCleanDirectoryTask(string taskName, string path)
+        {
+            GetTaskList()
+                .Add(new Dictionary<string, object>
+                {
+                    { "name", taskName },
+                    {
+                        "ansible.builtin.file",
+                        new BuiltInFileModule(path, State.absent, mode: "")
+                    }
+                });
+
+            return new AnsibleBuilder(_playbook);
+        }
+        
+        public AnsibleBuilder AddCreateDirectoryTask(string taskName, string path)
+        {
+            GetTaskList()
+                .Add(new Dictionary<string, object>
+                {
+                    { "name", taskName },
+                    {
+                        "ansible.builtin.file",
+                        new BuiltInFileModule(path, State.directory, mode: "0755")
+                    }
+                });
+
+            return new AnsibleBuilder(_playbook);
+        }
+
+        public AnsibleBuilder AddDownloadFileTask(string taskName, string url, string dest)
+        {
+            GetTaskList()
+                .Add(new Dictionary<string, object>
+                {
+                    { "name", taskName },
+                    {
+                        "get_url",
+                        new GetUrlModule(url, dest)
+                    }
+                });
+
+            return new AnsibleBuilder(_playbook);
+        }
+
+        public AnsibleBuilder AddServiceTask(string taskName, string name, State state)
         {
             GetTaskList()
                 .Add(new Dictionary<string, object>
@@ -50,8 +95,8 @@ namespace ECPMaster.Ansible
             return new AnsibleBuilder(_playbook);
         }
 
-        public AnsibleBuilder AddDockerContainerModule(string taskName, string name, string image, State state,
-            List<string> ports = null, List<string> volumes = null, string restartPolicy = "no")
+        public AnsibleBuilder AddDockerContainerTask(string taskName, string name, string image, State state,
+            List<string> ports = null, List<string> volumes = null, string restartPolicy = "no", Dictionary<string, string> etcHosts = null)
         {
             GetTaskList()
                 .Add(new Dictionary<string, object>
@@ -59,13 +104,80 @@ namespace ECPMaster.Ansible
                     { "name", taskName },
                     {
                         "docker_container",
-                        new DockerContainerModule(name, image, state, ports, volumes, restartPolicy)
+                        new DockerContainerModule(name, image, state, ports, volumes, restartPolicy, etcHosts)
                     }
                 });
 
             return new AnsibleBuilder(_playbook);
         }
 
+        public AnsibleBuilder AddCommandTask(string taskName, string command, bool ignoreErrors = false)
+        {
+            var dic = new Dictionary<string, object>
+            {
+                { "name", taskName },
+                {
+                    "command",
+                    command
+                }
+            };
+
+            if (ignoreErrors)
+            {
+                dic.Add("ignore_errors", "yes");
+            }
+            
+            GetTaskList()
+                .Add(dic);
+
+            return new AnsibleBuilder(_playbook);
+        }
+
+        public AnsibleBuilder AddMoveFileTask(string taskName, string src, string dest)
+        {
+            GetTaskList()
+                .Add(new Dictionary<string, object>
+                {
+                    { "name", taskName },
+                    {
+                        "template",
+                        new TemplateModule(src, dest)
+                    }
+                });
+
+            return new AnsibleBuilder(_playbook);
+        }
+
+        public AnsibleBuilder AddDockerLoginTask(string taskName, string username, string password)
+        {
+            GetTaskList()
+                .Add(new Dictionary<string, object>
+                {
+                    { "name", taskName },
+                    {
+                        "docker_login",
+                        new DockerLoginModule(username, password)
+                    }
+                });
+
+            return new AnsibleBuilder(_playbook);
+        }
+
+        public AnsibleBuilder AddDockerBuildAndPushTask(string taskName, string path, string name, string tag,
+            bool push)
+        {
+            GetTaskList()
+                .Add(new Dictionary<string, object>
+                {
+                    { "name", taskName },
+                    {
+                        "community.docker.docker_image",
+                        new DockerImageModule(path, name, tag, push)
+                    }
+                });
+
+            return new AnsibleBuilder(_playbook);
+        }
 
         public AnsiblePlaybook Build()
         {

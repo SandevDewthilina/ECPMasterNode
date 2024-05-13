@@ -11,9 +11,12 @@
 .server-container:hover {
     border: 3px solid #E48F20;
 }
-.server-container:c {
+.server-container:checked {
     border: 3px solid #E48F20;
 }
 svg {
     font-size: 17px !important;
+}
+.clicked {
+    border: 3px solid #E48F20;
 }

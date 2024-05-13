@@ -6,15 +6,17 @@ ssh root@ip
 adduser ecp
 passwd ecp
 usermod -aG wheel ecp
-ssh-keygen
+sudo su - ecp
 mkdir -p ~/.ssh
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+cat `~/.ssh/id_rsa.pub` >> ~/.ssh/authorized_keys
+chmod 700 /home/ecp/.ssh
+chmod 700 /home/ecp/.ssh/authorized_keys
 ```
 
 ### Add a ansible config file for store credentials
 - create a inventory file myHosts.txt
 ```
-16.170.140.133 ansible_ssh_user=root ansible_ssh_pass=sandevdsic123
+16.170.140.133 ansible_ssh_user=root ansible_ssh_pass=root123
 ```
 - mkdir `/etc/ansible`
 - nano `/etc/ansible/ansible.cfg`
@@ -27,6 +29,7 @@ inventory = /home/ubuntu/myHosts.txt
 __NOTE__: To run an ansible playbook `ansible-playbook -i /path/to/inventory_file deploy_container.yml`
 
 ### Install docker on Rocky linux 9
+#### _NOTE_: Rocky Linux 9 does not have support for docker
 
 ```bash
 sudo dnf check-update
@@ -40,4 +43,15 @@ sudo systemctl enable docker
 sudo usermod -aG docker $(whoami)
 # test 
 docker ps
+```
+
+## How to add DB Migrations
+
+```shell
+# add Migration
+dotnet ef migrations add AddBlogCreatedTimestamp
+# update DB
+dotnet ef database update
+# remove Migration
+dotnet ef migrations remove
 ```

@@ -2,7 +2,9 @@
 using ECPMaster.Ansible;
 using ECPMaster.DbContext;
 using ECPMaster.Models;
+using ECPMaster.Utils;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -13,27 +15,18 @@ namespace ECPMaster.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ECPDbContext _db;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public HomeController(ILogger<HomeController> logger, ECPDbContext db)
+        public HomeController(ILogger<HomeController> logger, ECPDbContext db, IWebHostEnvironment hostEnvironment)
         {
             _logger = logger;
             _db = db;
+            _hostEnvironment = hostEnvironment;
         }
 
         public IActionResult Index()
         {
-
             return View();
-        }
-
-        public object Yaml()
-        {
-            return AnsibleBuilder.BuildAnsiblePlaybook("Deploy docker container", "rl", true)
-                .AddServiceModule("Ensure docker is running", "docker", State.started)
-                .AddDockerContainerModule("Deploy Docker container", "nginx-test", "nginx:latest", State.started,
-                    ports: new List<string>() { "80:80" })
-                .Build()
-                .SaveFile();
         }
     }
 }
