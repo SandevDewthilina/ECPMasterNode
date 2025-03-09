@@ -84,7 +84,7 @@ namespace ECPMaster.Utils
 
         public void ExecuteDeployment(ECPDeployment deployment)
         {
-            var workSpaceDir = Path.Combine("home", "ecp", $"ws{deployment.Id}");
+            var workSpaceDir = $"ws{deployment.Id}";
             var artifactsDir = Path.Combine(workSpaceDir, "downloaded_file");
             var dockerRegistry = "sandevdewthilina/ecp-core";
             var dockerImageTag = $"d{deployment.Id}-a{deployment.Artifact.Id}-at{deployment.Artifact.Tag}";
@@ -118,11 +118,9 @@ namespace ECPMaster.Utils
                         .AddDockerBuildAndPushTask("Build and push docker image", artifactsDir, dockerRegistry,
                             dockerImageTag, true)
                         .AddCommandTask("Create DB",
-                            $"docker exec -i mysql-core mysql -u {deployment.DbConfig.User} --password={deployment.DbConfig.Password} -e \"CREATE DATABASE IF NOT EXISTS {"cherish_v3"}\"")
-                        .AddCommandTask("Copy backup to mysql docker",
-                            $"docker cp {Path.Combine(artifactsDir, "artifacts", deployment.DbConfig.DbBackupFileName)} mysql-core:/tmp/{deployment.DbConfig.DbBackupFileName}")
+                            $"mysql -h 127.0.0.1 -u {deployment.DbConfig.User} --password={deployment.DbConfig.Password} -e \"CREATE DATABASE IF NOT EXISTS {"cherish_v3"}\"")
                         .AddCommandTask("Restore Database",
-                            $"docker exec -i mysql-core mysql -u {deployment.DbConfig.User} --password={deployment.DbConfig.Password} -e \"use {"cherish_v3"}; source /tmp/{deployment.DbConfig.DbBackupFileName}\"",
+                            $"mysql -h 127.0.0.1 -u {deployment.DbConfig.User} --password={deployment.DbConfig.Password} -e \"use {"cherish_v3"}; source /tmp/{deployment.DbConfig.DbBackupFileName}\"",
                             ignoreErrors: true)
                         .AddDockerContainerTask("Run Web Docker Container", $"deployment-{deployment.Id}",
                             dockerRegistry + ":" + dockerImageTag, State.started, ports: new List<string>() { $"{deployment.Port}:6555" },
@@ -150,7 +148,7 @@ namespace ECPMaster.Utils
 
                     process.Start();
                     
-                    db.EcpLogs.AddRange(playbook.ToYaml().Split("\n").Select(line => new ECPLog() {DeploymentId = deployment.Id, Line = line}));
+                    db.EcpLogs.Add(new ECPLog() {DeploymentId = deployment.Id, Line = playbook.ToYaml()});
                     db.SaveChanges();
 
                     // Stream logs in real-time

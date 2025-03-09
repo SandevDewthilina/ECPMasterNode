@@ -48,13 +48,10 @@
         state: started
         
     - name: Create Database
-      command: "docker exec -i mysql-core mysql -u root --password=r00t1@88Hetz2022 -e \"CREATE DATABASE IF NOT EXISTS cherish_v3\""
-      
-    - name: Copy backup to Docker
-      command: "docker cp /home/ecp/ws1/downloaded_file/artifacts/goldencopy_v2_20240216_164002.sql mysql-core:/tmp/goldencopy_v2_20240216_164002.sql"
+      command: "mysql -u root -h 127.0.0.1 --password=r00t1@88Hetz2022 -e \"CREATE DATABASE IF NOT EXISTS cherish_v3\""
    
     - name: Restore database
-      command: "docker exec -i mysql-core mysql -u root --password=r00t1@88Hetz2022 -e \"use cherish_v3; source /tmp/goldencopy_v2_20240216_164002.sql\""
+      command: "mysql -u root -h 127.0.0.1 --password=r00t1@88Hetz2022 -e \"use cherish_v3; source /tmp/goldencopy_v2_20240216_164002.sql\""
       ignore_errors: yes
       
     - name: Deploy Docker container

@@ -1,0 +1,6 @@
+﻿services:
+  ecpmaster:
+    image: ecpmaster
+    build:
+      context: .
+      dockerfile: ECPMaster/ContainedSystemTemplate/artifacts/Dockerfile
