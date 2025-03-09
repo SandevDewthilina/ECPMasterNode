@@ -1,28 +1,40 @@
-FROM node:18 as npmstage
-COPY ["ECPMaster/package.json", "/code/"]
-WORKDIR /code
+# Stage 1: Build the .NET application
+FROM sandevdewthilina/ecp-core:base-image-3.1-asp.net-core AS dotnet-build
+WORKDIR /master
+
+# Copy the solution and project files
+COPY *.sln .
+COPY ECPMaster/*.csproj ./ECPMaster/
+
+# Restore .NET dependencies
+RUN dotnet restore
+
+# Copy the remaining source code
+COPY ECPMaster/ ./ECPMaster/
+
+# Publish the .NET application
+RUN dotnet publish -c Release -o /app/publish
+
+# Stage 2: Install Node.js dependencies
+FROM node:18 AS node-build
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY ECPMaster/package*.json ./
+
+# Install Node.js dependencies
 RUN npm install
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+# Stage 3: Create the runtime image
+FROM sandevdewthilina/ecp-core:base-runtime-3.1-asp.net-core AS runtime
 WORKDIR /app
-EXPOSE 5000
-EXPOSE 5001
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-WORKDIR /src
-COPY ["ECPMaster/ECPMaster.csproj", "ECPMaster/"]
-RUN dotnet restore "ECPMaster/ECPMaster.csproj"
-COPY . .
-WORKDIR "/src/ECPMaster"
-RUN dotnet build "ECPMaster.csproj" -c Release -o /app/build
+# Copy the published .NET application
+COPY --from=dotnet-build /app/publish .
 
-FROM build AS publish
-RUN dotnet publish "ECPMaster.csproj" -c Release -o /app/publish
+# Copy the node_modules directory
+COPY --from=node-build /app/node_modules ./node_modules
 
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-COPY --from=npmstage /code/node_modules /app/node_modules/
-RUN ls /app
+EXPOSE 18001
+EXPOSE 3307
 ENTRYPOINT ["dotnet", "ECPMaster.dll"]
