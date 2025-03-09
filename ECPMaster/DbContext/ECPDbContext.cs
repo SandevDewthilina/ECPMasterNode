@@ -1,4 +1,5 @@
-﻿using ECPMaster.Models;
+﻿using ECPMaster.Entities;
+using ECPMaster.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,22 +10,11 @@ namespace ECPMaster.DbContext
         public ECPDbContext(DbContextOptions<ECPDbContext> options) : base(options)
         {
         }
-
-        // protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //     base.OnModelCreating(modelBuilder);
-        //
-        //     // set primary key as userRoleId + TagId
-        //     modelBuilder.Entity<UserRoleTagMapping>()
-        //         .HasKey(c => new {c.UserRoleId, c.TagId});
-        //     // set primary key as VehicleTagId + ContainerTagId
-        //     modelBuilder.Entity<ContainerVehicleMapping>()
-        //         .HasKey(c => new {c.VehicleAssetId, c.ContainerAssetId});
-        // }
-        //get the dbset for the entity
-        // public DbSet<TEntity> GetDbSet<TEntity>() where TEntity : class
-        // {
-        //     return Set<TEntity>();
-        // }
+        // Entities
+        public DbSet<ECPNode> EcpNodes{ get; set; }
+        public DbSet<ECPDeployment> EcpDeployments { get; set; }
+        public DbSet<ECPArtifact> EcpArtifacts { get; set; }
+        public DbSet<ECPDbConfig> EcpDbConfigs { get; set; }
+        public DbSet<ECPLog> EcpLogs { get; set; }
     }
 }

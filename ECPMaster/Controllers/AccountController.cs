@@ -43,7 +43,7 @@ namespace ECPMaster.Controllers
                     if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         return RedirectToAction("ListUsers", "Administration");
-                    } 
+                    }
                     if (_signInManager.IsSignedIn(User))
                     {
                         return RedirectToAction("Index", "Home");

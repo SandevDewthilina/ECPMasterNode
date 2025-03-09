@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="~/css/my-dropdown.css/my-dropdown.css"/>
 }
 
+@using ECPMaster.Entities
+@model ECPMaster.ViewModels.DeploymentViewModel
+
 <div class="container">
 <section>
     <div class="page-main-header">Deployment pipeline</div>
@@ -18,9 +21,10 @@
 </section>
 <section class="mt-2 main-page-content">
 <div class="col-sm-10">
+<form method="post">
 <div class="d-flex justify-content-end">
     <button class="my-btn mr-2">Cancel</button>
-    <button class="my-btn-danger">Execute deployment</button>
+    <button class="my-btn-danger" type="submit">Execute deployment</button>
 </div>
 <!-- deployment overview -->
 <div class="my-card mt-3">
@@ -62,139 +66,58 @@
             Choose a deployment server
         </small
         >
+        <input type="hidden" id="serverIdentifierInput" asp-for="NodeId">
         <div class="d-flex flex-wrap">
-            <!-- server item -->
-            <div class="server-container">
-                <div
-                    class="server-container-left d-flex flex-column align-items-center justify-content-between mr-1">
-                    <div>
-                        <div style="font-size: 14px; font-weight: 900">
-                            aws-88-server
-                        </div>
+            @if (Model.Nodes != null && Model.Nodes.Any())
+            {
+                @foreach (var node in Model.Nodes)
+                {
+                    <!-- server item -->
+                    <div class="server-container" id="servercontainer-@node.Id" onclick="fillHiddenInput('@node.Id')">
                         <div
-                            style="
+                            class="server-container-left d-flex flex-column align-items-center justify-content-between mr-1">
+                            <div>
+                                <div style="font-size: 14px; font-weight: 900">
+                                    @node.NodeIdentifier
+                                </div>
+                                <div
+                                    style="
                             font-size: 12px;
                             font-weight: 500;
                             color: #232f3e;
                           ">
-                            IPv4: 198.234.32.3
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="server-container-right d-flex justify-content-center align-items-center ml-3">
-                    <div
-                        class="d-flex justify-content-center"
-                        style="
-                          color: #266f16;
-                          font-size: 12px;
-                          font-weight: 900;
-                        ">
-                        <i class="far fa-check-circle mr-1"></i>Available
-                    </div>
-                </div>
-            </div>
-            <!-- server item end -->
-            <!-- server item -->
-            <div class="server-container">
-                <div
-                    class="server-container-left d-flex flex-column align-items-center justify-content-between mr-1">
-                    <div>
-                        <div style="font-size: 14px; font-weight: 900">
-                            aws-88-server
+                                    IPv4: @node.IPv4
+                                </div>
+                            </div>
                         </div>
                         <div
-                            style="
-                            font-size: 12px;
-                            font-weight: 500;
-                            color: #232f3e;
-                          ">
-                            IPv4: 198.234.32.3
+                            class="server-container-right d-flex justify-content-center align-items-center ml-3">
+                            @if (node.NodeState.Equals(AgentState.Available))
+                            {
+                                <div
+                                    class="d-flex justify-content-center"
+                                    style=" color: #266f16; font-size: 12px; font-weight: 900;">
+                                    <i class="far fa-check-circle mr-1"></i>@node.NodeState
+                                </div>
+                            }
+                            else
+                            {
+                                <div
+                                    class="d-flex justify-content-center"
+                                    style=" color: #CA2E2E; font-size: 12px; font-weight: 900;">
+                                    <i class="far fa-check-circle mr-1"></i>@node.NodeState
+                                </div>
+                            }
                         </div>
                     </div>
-                </div>
-                <div
-                    class="server-container-right d-flex justify-content-center align-items-center ml-3">
-                    <div
-                        class="d-flex justify-content-center"
-                        style="
-                          color: #266f16;
-                          font-size: 12px;
-                          font-weight: 900;
-                        ">
-                        <i class="far fa-check-circle mr-1"></i>Available
-                    </div>
-                </div>
-            </div>
-            <!-- server item end -->
-            <!-- server item -->
-            <div class="server-container">
-                <div
-                    class="server-container-left d-flex flex-column align-items-center justify-content-between mr-1">
-                    <div>
-                        <div style="font-size: 14px; font-weight: 900">
-                            aws-88-server
-                        </div>
-                        <div
-                            style="
-                            font-size: 12px;
-                            font-weight: 500;
-                            color: #232f3e;
-                          ">
-                            IPv4: 198.234.32.3
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="server-container-right d-flex justify-content-center align-items-center ml-3">
-                    <div
-                        class="d-flex justify-content-center"
-                        style="
-                          color: #266f16;
-                          font-size: 12px;
-                          font-weight: 900;
-                        ">
-                        <i class="far fa-check-circle mr-1"></i>Available
-                    </div>
-                </div>
-            </div>
-            <!-- server item end -->
-            <!-- server item -->
-            <div class="server-container">
-                <div
-                    class="server-container-left d-flex flex-column align-items-center justify-content-between mr-1">
-                    <div>
-                        <div style="font-size: 14px; font-weight: 900">
-                            aws-88-server
-                        </div>
-                        <div
-                            style="
-                            font-size: 12px;
-                            font-weight: 500;
-                            color: #232f3e;
-                          ">
-                            IPv4: 198.234.32.3
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="server-container-right d-flex justify-content-center align-items-center ml-3">
-                    <div
-                        class="d-flex justify-content-center"
-                        style="
-                          color: #266f16;
-                          font-size: 12px;
-                          font-weight: 900;
-                        ">
-                        <i class="far fa-check-circle mr-1"></i>Available
-                    </div>
-                </div>
-            </div>
-            <!-- server item end -->
+                    <!-- server item end -->
+                }
+            }
         </div>
     </div>
 </div>
 <!-- server selection end -->
+
 <!-- .Net core setup -->
 <div class="my-card mt-5">
     <div class="my-card-header">Configure deployment system</div>
@@ -204,9 +127,10 @@
             <input
                 class="form-control"
                 type="text"
+                asp-for="SystemName"
                 placeholder="e.g. lankem_uat_system"/>
             <div class="my-input-footer-label mb-2 mt-1">
-                *Unique identifier for the system
+                *Unique identifier for the Deployment
             </div>
 
             <div class="my-input-label mb-1">Select artifact</div>
@@ -214,6 +138,7 @@
             <div class="custom-dropdown d-flex">
                 <input
                     class="dropdown-btn form-control"
+                    asp-for="ArtifactName"
                     placeholder="Select an option"/>
                 <ul class="dropdown-content">
                     <input
@@ -221,59 +146,25 @@
                         class="search-input form-control"
                         placeholder="Search..."/>
                     <!-- options -->
-                    <li value="lankem-v2-pharma">
-                        <div class="d-flex flex-column">
-                            <div style="font-weight: 600; font-size: 12px">
-                                lankem-v2-pharama
+                    @foreach (var artifacts in Model.Artifacts)
+                    {
+                        <li value="@artifacts.Name">
+                            <div class="d-flex flex-column">
+                                <div style="font-weight: 600; font-size: 12px">
+                                    @artifacts.Name
+                                </div>
+                                <div style="font-size: 10px">
+                                    ID: @artifacts.Id
+                                </div>
+                                <div style="font-size: 10px">
+                                    Tags: @artifacts.Tag
+                                </div>
+                                <div style="font-size: 10px">
+                                    Description: @artifacts.Url
+                                </div>
                             </div>
-                            <div style="font-size: 10px">
-                                last update: 2023/07/04
-                            </div>
-                            <div style="font-size: 10px">
-                                Description: latest stable version of lankem system.
-                            </div>
-                        </div>
-                    </li>
-                    <li value="lankem-v2">
-                        <div class="d-flex flex-column">
-                            <div style="font-weight: 600; font-size: 12px">
-                                v3_new_erpweb DB
-                            </div>
-                            <div style="font-size: 10px">
-                                last update: 2023/07/04
-                            </div>
-                            <div style="font-size: 10px">
-                                Description: latest stable version of lankem system.
-                            </div>
-                        </div>
-                    </li>
-                    <li value="lankem-v2-pharma">
-                        <div class="d-flex flex-column">
-                            <div style="font-weight: 600; font-size: 12px">
-                                ruhunu_erpweb DB
-                            </div>
-                            <div style="font-size: 10px">
-                                last update: 2023/07/04
-                            </div>
-                            <div style="font-size: 10px">
-                                Description: latest stable version of lankem system.
-                            </div>
-                        </div>
-                    </li>
-                    <li value="lankem-v2-pharma">
-                        <div class="d-flex flex-column">
-                            <div style="font-weight: 600; font-size: 12px">
-                                lankem-v2-pharama
-                            </div>
-                            <div style="font-size: 10px">
-                                last update: 2023/07/04
-                            </div>
-                            <div style="font-size: 10px">
-                                Description: latest stable version of lankem system.
-                            </div>
-                        </div>
-                    </li>
-                    <!-- Add more options as needed -->
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -289,15 +180,68 @@
             <input
                 class="form-control"
                 type="text"
+                asp-for="SystemPort"
                 placeholder="e.g. 0.0.0.0:8100"/>
             <div class="my-input-footer-label mb-2 mt-1">
                 *Unique identifier for the system
             </div>
+
+            <div class="my-input-label mb-1">MySQL Port</div>
+            <input
+                class="form-control"
+                type="text"
+                asp-for="MySqlPort"
+                placeholder="e.g. 0.0.0.0:8100"/>
+            <div class="my-input-footer-label mb-2 mt-1">
+                *Unique port for the mysql instance
+            </div>
+
+            <div class="my-input-label mb-1">MySQL User</div>
+            <input
+                class="form-control"
+                type="text"
+                asp-for="MySqlUser"
+                placeholder="e.g. root"/>
+            <div class="my-input-footer-label mb-2 mt-1">
+                *Username of the mysql database
+            </div>
+
+            <div class="my-input-label mb-1">MySQL Password</div>
+            <input
+                class="form-control"
+                type="password"
+                asp-for="MySqlPassword"
+                placeholder="e.g. xxxx"/>
+            <div class="my-input-footer-label mb-2 mt-1">
+                *Password of the mysql database
+            </div>
+
+            <div class="my-input-label mb-1">DB Name</div>
+            <input
+                class="form-control"
+                type="text"
+                asp-for="DbName"
+                placeholder="e.g. golden_copy.sql"/>
+            <div class="my-input-footer-label mb-2 mt-1">
+                *Name for the db
+            </div>
+
+            <div class="my-input-label mb-1">DB Backup File name</div>
+            <input
+                class="form-control"
+                type="text"
+                asp-for="DbBackupFileName"
+                placeholder="e.g. golden_copy.sql"/>
+            <div class="my-input-footer-label mb-2 mt-1">
+                *SQL file name for the db backup
+            </div>
+
             <div class="my-input-label mb-1">
                 Exposing subdomain (Optional)
             </div>
             <input
                 class="form-control"
+                asp-for="SubDomain"
                 type="text"
                 placeholder="e.g. subname.evisionmicro.com"/>
             <div class="my-input-footer-label mb-2 mt-1">
@@ -307,11 +251,27 @@
     </div>
 </div>
 <!-- environment variables setup end -->
+</form>
 </div>
 </section>
 </div>
 
 @section Scripts
 {
-     <script src="~/js/my-dropdown.js"></script>
+    <script src="~/js/my-dropdown.js"></script>
+    <script>
+        var previousClickedContainer = null;
+        function fillHiddenInput(identifier) {
+            // Retrieve the hidden input element
+            var hiddenInput = document.getElementById('serverIdentifierInput');
+            var serverContainer = document.getElementById('servercontainer-' + identifier);
+             if (previousClickedContainer !== null) {
+                    previousClickedContainer.classList.remove('clicked');
+                }
+            // Set the value of the hidden input to the server identifier
+            hiddenInput.value = identifier;
+            serverContainer.classList.toggle('clicked');
+             previousClickedContainer = serverContainer;
+        }
+    </script>
 }

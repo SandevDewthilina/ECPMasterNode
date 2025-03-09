@@ -57,7 +57,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" asp-action="Index" asp-controller="Home">
                     <div class="d-flex">
                         <ion-icon
                             name="apps-sharp"
@@ -106,9 +106,9 @@
                     <div>Agents</div>
                 </div>
                 <div class="sidebar-submenu">
-                    <a class="sidebar-submenu-item" asp-action="ViewAgents" asp-controller="Agents">View Agents</a>
-                    <a class="sidebar-submenu-item" asp-action="ConfigureAgent" asp-controller="Agents">Configure Slave Node</a>
-                    <a class="sidebar-submenu-item" asp-action="EditSlaveNodes" asp-controller="Agents">Edit Nodes</a>
+                    <a class="sidebar-submenu-item" asp-action="ViewAgents" asp-controller="Nodes">View Agents</a>
+                    <a class="sidebar-submenu-item" asp-action="ConfigureAgent" asp-controller="Nodes">Configure Slave Node</a>
+                    <a class="sidebar-submenu-item" asp-action="EditSlaveNodes" asp-controller="Nodes">Edit Nodes</a>
                 </div>
             </div>
 
@@ -119,8 +119,7 @@
                 </div>
                 <div class="sidebar-submenu">
                     <a class="sidebar-submenu-item" asp-action="ListArtifacts" asp-controller="Artifacts">List Artifacts</a>
-                    @* <a class="sidebar-submenu-item">Build .NET Core Artifacts</a> *@
-                    @* <a class="sidebar-submenu-item">Build MySQL Artifacts</a> *@
+                    <a class="sidebar-submenu-item" asp-action="AddArtifacts" asp-controller="Artifacts">Add Artifact</a>
                 </div>
             </div>
 
@@ -153,7 +152,8 @@
                 </div>
                 <div class="sidebar-submenu">
                     <a class="sidebar-submenu-item" asp-action="DeploymentPipeline" asp-controller="Deployment">Deploy a system</a>
-                    <a class="sidebar-submenu-item">Manage Deployments</a>
+                    <a class="sidebar-submenu-item" asp-action="ExecuteDeployment" asp-controller="Deployment">Execute Deployment</a>
+                    <a class="sidebar-submenu-item" asp-action="ManageDeployments" asp-controller="Deployment">Manage Deployments</a>
                 </div>
             </div>
 

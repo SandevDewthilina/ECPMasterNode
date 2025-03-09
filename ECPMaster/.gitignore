@@ -1,0 +1,3 @@
+ContainedSystemTemplate/artifacts
+ContainedSystemTemplate/mysql-volume
+ContainedSystem/**/*

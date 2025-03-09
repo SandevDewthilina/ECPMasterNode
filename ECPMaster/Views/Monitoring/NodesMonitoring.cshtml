@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Nodes Monitoring";
+    ViewData["Title"] = "Monitor Nodes";
     Layout = "_Layout";
 }
 
@@ -8,469 +8,146 @@
     <link rel="stylesheet" href="~/css/view-agents/view-agents.css"/>
 }
 
-<div class="container">
-<section>
-    <div class="page-main-header">@ViewData["Title"]</div>
-    <div class="page-sub-header">
-        View currently working agents of the control environment
-    </div>
-</section>
-<section class="mt-2 main-page-content">
-<div class="d-flex flex-wrap">
-<!-- agent block -->
-<div class="agent-block">
-    <div class="my-card">
-        <div class="my-card-header">aws-88-server</div>
-        <div class="my-card-body">
-            <div class="agent-inner-container">
-                <div class="agent-half-block">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">Node Identifier</div>
-                                <div class="info-pair-subtitle">aws-88-server</div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">IPv4</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">State</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #CA2E2E">
-                                    <i class="far fa-times-circle mr-1"></i>Error
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">Operating System</div>
-                                <div class="info-pair-subtitle">
-                                    Linux/CentOS 7 x86
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="vertical-ruler"></div>
-                <div class="agent-half-block">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">System Monitoring</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">
-                                    Realtime Monitoring
-                                </div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">Logs Monitoring</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">Backups Status</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- agent block end -->
-<!-- agent block -->
-<div class="agent-block">
-    <div class="my-card">
-        <div class="my-card-header">aws-88-server</div>
-        <div class="my-card-body">
-            <div class="agent-inner-container">
-                <div class="agent-half-block">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">Node Identifier</div>
-                                <div class="info-pair-subtitle">aws-88-server</div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">IPv4</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">State</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #266f16">
-                                    <i class="far fa-check-circle mr-1"></i>Available
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">Operating System</div>
-                                <div class="info-pair-subtitle">
-                                    Linux/CentOS 7 x86
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="vertical-ruler"></div>
-                <div class="agent-half-block">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">System Monitoring</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">
-                                    Realtime Monitoring
-                                </div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">Logs Monitoring</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">Backups Status</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- agent block end -->
-<!-- agent block -->
-<div class="agent-block">
-    <div class="my-card">
-        <div class="my-card-header">aws-88-server</div>
-        <div class="my-card-body">
-            <div class="agent-inner-container">
-                <div class="agent-half-block">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">Node Identifier</div>
-                                <div class="info-pair-subtitle">aws-88-server</div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">IPv4</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">State</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #266f16">
-                                    <i class="far fa-check-circle mr-1"></i>Available
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">Operating System</div>
-                                <div class="info-pair-subtitle">
-                                    Linux/CentOS 7 x86
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="vertical-ruler"></div>
-                <div class="agent-half-block">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">System Monitoring</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">
-                                    Realtime Monitoring
-                                </div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">Logs Monitoring</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">Backups Status</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- agent block end -->
-<!-- agent block -->
-<div class="agent-block">
-    <div class="my-card">
-        <div class="my-card-header">aws-88-server</div>
-        <div class="my-card-body">
-            <div class="agent-inner-container">
-                <div class="agent-half-block">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">Node Identifier</div>
-                                <div class="info-pair-subtitle">aws-88-server</div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">IPv4</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">State</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #266f16">
-                                    <i class="far fa-check-circle mr-1"></i>Available
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">Operating System</div>
-                                <div class="info-pair-subtitle">
-                                    Linux/CentOS 7 x86
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="vertical-ruler"></div>
-                <div class="agent-half-block">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">System Monitoring</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">
-                                    Realtime Monitoring
-                                </div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="info-pair">
-                                <div class="info-pair-title">Logs Monitoring</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="info-pair">
-                                <div class="info-pair-title">Backups Status</div>
-                                <div
-                                    class="info-pair-subtitle"
-                                    style="color: #000000">
-                                    <i class="far fa-clone mr-1">
-                                    </i
-                                    >
-                                    <a href="#">
-                                        <u>192.168.5.9</u>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- agent block end -->
-@* aggregated links *@
+@using ECPMaster.Entities
+@model IEnumerable<ECPMaster.Entities.ECPNode>
 
-</div>
-</section>
+<div class="container">
+    <section>
+        <div class="page-main-header">@ViewData["Title"]</div>
+        <div class="page-sub-header">
+            View currently working agents of the control environment
+        </div>
+    </section>
+    <section class="mt-2 main-page-content">
+        <div class="d-flex flex-wrap">
+
+            @foreach (var node in Model)
+            {
+                <!-- agent block -->
+                <div class="agent-block">
+                    <div class="my-card">
+                        <div class="my-card-header">@node.NodeIdentifier</div>
+                        <div class="my-card-body">
+                            <div class="agent-inner-container">
+                                <div class="agent-half-block">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="info-pair">
+                                                <div class="info-pair-title">Node Identifier</div>
+                                                <div class="info-pair-subtitle">@node.NodeIdentifier</div>
+                                            </div>
+                                            <div class="info-pair">
+                                                <div class="info-pair-title">IPv4</div>
+                                                <div
+                                                    class="info-pair-subtitle"
+                                                    style="color: #000000">
+                                                    <i class="far fa-clone mr-1">
+                                                    </i
+                                                    >
+                                                    <a href="http://@node.IPv4" target="_blank">
+                                                        <u>@node.IPv4</u>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="info-pair">
+                                                <div class="info-pair-title">State</div>
+                                                @if (node.NodeState.Equals(AgentState.Available))
+                                                {
+                                                    <div
+                                                        class="info-pair-subtitle status-badge-@node.Id"
+                                                        style="color: #266f16">
+                                                        <i class="far fa-check-circle mr-1"></i>@node.NodeState
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div
+                                                        class="info-pair-subtitle"
+                                                        style="color: #CA2E2E">
+                                                        <i class="far fa-times-circle mr-1"></i>@node.NodeState
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="info-pair">
+                                                <div class="info-pair-title">Operating System</div>
+                                                <div class="info-pair-subtitle">
+                                                    @node.OperatingSystem
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="vertical-ruler"></div>
+                                <div class="agent-half-block">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="info-pair">
+                                                <div class="info-pair-title">System Monitoring</div>
+                                                <div
+                                                    class="info-pair-subtitle"
+                                                    style="color: #000000">
+                                                    <i class="far fa-clone mr-1">
+                                                    </i
+                                                    >
+                                                    <a href="#">
+                                                        <u>192.168.5.9</u>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="info-pair">
+                                                <div class="info-pair-title">
+                                                    Realtime Monitoring
+                                                </div>
+                                                <div
+                                                    class="info-pair-subtitle"
+                                                    style="color: #000000">
+                                                    <i class="far fa-clone mr-1">
+                                                    </i
+                                                    >
+                                                    <a href="#">
+                                                        <u>192.168.5.9</u>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="info-pair">
+                                                <div class="info-pair-title">Logs Monitoring</div>
+                                                <div
+                                                    class="info-pair-subtitle"
+                                                    style="color: #000000">
+                                                    <i class="far fa-clone mr-1">
+                                                    </i
+                                                    >
+                                                    <a href="#">
+                                                        <u>192.168.5.9</u>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="info-pair">
+                                                <div class="info-pair-title">Backups Status</div>
+                                                <div
+                                                    class="info-pair-subtitle"
+                                                    style="color: #000000">
+                                                    <i class="far fa-clone mr-1">
+                                                    </i
+                                                    >
+                                                    <a href="#">
+                                                        <u>192.168.5.9</u>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- agent block end -->
+            }
+        </div>
+    </section>
 </div>
